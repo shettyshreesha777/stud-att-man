@@ -57,8 +57,11 @@ if($_SESSION['name']!='oasis')
 
     <label>Select Course</label>
     <select name="whichcourse">
-       <option name="networking" value="networking">Computer Networks</option>
-       <option name="swe" value="swe">Software Engineering</option>
+       <option name="networking" value="computer_network">Computer Networks</option>
+       <option name="database_management" value="database_management">Database Management </option>
+       <option name="analog_electronics" value="analog_electronics">Analog Electronics </option>
+       <option name="digital_signal_proce" value="digital_signal_proce">Digital Signal Process </option>
+
     </select>
 
       <p>  </p>
@@ -74,8 +77,10 @@ if($_SESSION['name']!='oasis')
 
     <label>Select Course</label>
     <select name="whichcourse">
-       <option name="networking" value="networking">Computer Networks</option>
-       <option name="swe" value="swe">Software Engineering</option>
+    <option name="networking" value="computer_network">Computer Networks</option>
+       <option name="database_management" value="database_management">Database Management </option>
+       <option name="analog_electronics" value="analog_electronics">Analog Electronics </option>
+       <option name="digital_signal_proce" value="digital_signal_proce">Digital Signal Process </option>
     </select>
     <p>  </p>
       <label>Date ( yyyy-mm-dd )</label>

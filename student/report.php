@@ -66,9 +66,11 @@ if($_SESSION['name']!='oasis')
     <label  for="input1" class="col-sm-3 control-label">Select Course</label>
       <div class="col-sm-4">
       <select name="whichcourse" id="input1">
-         <option name="networking" value="networking">Computer Networks</option>
-        <option name="swe" value="swe">Software Engineering</option>
-      </select>
+    <option name="networking" value="computer_network">Computer Networks</option>
+       <option name="database_management" value="database_management">Database Management </option>
+       <option name="analog_electronics" value="analog_electronics">Analog Electronics </option>
+       <option name="digital_signal_proce" value="digital_signal_proce">Digital Signal Process </option>
+    </select>
       </div>
 
   </div>

@@ -15,13 +15,13 @@ if($_SESSION['name']!='oasis')
       
     if(isset($_POST['att'])){
 
-      $course = $_POST['whichcourse'];
+      $course = $_POST['subject'];
 
       foreach ($_POST['st_status'] as $i => $st_status) {
         
         $stat_id = $_POST['stat_id'][$i];
         $dp = date('Y-m-d', strtotime($_POST['attdate']));
-        $course = $_POST['whichcourse'];
+        $course = $_POST['subject'];
         
         $stat = mysqli_query($conn,"insert into attendance(stat_id,course,st_status,stat_date) values('$stat_id','$course','$st_status','$dp')");
         
@@ -96,9 +96,15 @@ if($_SESSION['name']!='oasis')
                 <label>Select Batch</label>
                 
                 <select name="whichbatch" id="input1">
-                      <option name="eight" value="38">38</option>
-                      <option name="seven" value="37">37</option>
+                      <option name="eight" value="24">24</option>
+                      <option name="seven" value="25">25</option>
                 </select>
+                <label >Select Branch</label>
+
+              <select name="whichbranch" id="selectbranch">
+                <option name="branch" value="CSE">CSE</option>
+                <option name="branch" value="EC">EC</option>
+              </select>
               </div>
                
      <input type="submit" class="btn btn-primary col-md-2 col-md-offset-5" value="Show!" name="batch" />
@@ -112,11 +118,18 @@ if($_SESSION['name']!='oasis')
       <label>Attendance of</label>
     <input type="date" name="attdate" value="<?php echo date('Y-m-d'); ?>" /> 
     <br>
-        <label >Select Course</label>
-              <select name="whichcourse" id="input1">
-                 <option name="networking" value="networking">Computer Networks</option>
-                <option name="swe" value="swe">Software Engineering</option>
-              </select>
+
+    <label >Select Branch</label>
+
+<select name="bf2" id="sb2" onclick="updateSubjects()">
+  <option name="branch2" value="CSE">CSE</option>
+  <option name="branch2" value="EC">EC</option>
+</select>
+
+    <label for="subject">Select Subject:</label>
+    <select id="subject" name="subject">
+    <!-- Options will be dynamically populated based on branch selection -->
+  </select>            
 
       </div>
 
@@ -139,7 +152,8 @@ if($_SESSION['name']!='oasis')
      $i=0;
      $radio = 0;
      $batch = $_POST['whichbatch'];
-     $all_query = mysqli_query($conn,"select * from students where st_batch='$batch' order by st_id asc");
+     $branch=$_POST['whichbranch'];
+     $all_query = mysqli_query($conn,"select * from students where st_batch='$batch' AND st_dept='$branch' order by st_id asc");
 
      while ($data = mysqli_fetch_array($all_query)) {
        $i++;
@@ -179,6 +193,30 @@ if($_SESSION['name']!='oasis')
 </div>
 
 </center>
-
+<script>
+function updateSubjects() {
+  var branch = document.getElementById("sb2").value;
+  var subjectSelect = document.getElementById("subject");
+  subjectSelect.innerHTML = ""; // Clear existing options
+  
+  // Populate subjects based on selected branch
+  if (branch === "CSE") {
+    var subjects = ["Computer Network", "Database Management"];
+  } else if (branch === "EC") {
+    var subjects = ["Analog Electronics", "Digital Signal Processing"];
+  } 
+  
+  // Add options to the select element
+  for (var i = 0; i < subjects.length; i++) {
+    var option = document.createElement("option");
+    option.text = subjects[i];
+    option.value = subjects[i].toLowerCase().replace(/\s+/g, "_"); // Convert subject name to lowercase and replace spaces with underscores
+    subjectSelect.appendChild(option);
+  }
+}
+  
+// Call updateSubjects function initially to populate subjects based on the default branch selection
+updateSubjects();
+</script>
 </body>
 </html>
